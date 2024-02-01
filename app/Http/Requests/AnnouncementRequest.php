@@ -22,7 +22,10 @@ class AnnouncementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|unique:announcements|max:50',
+            'description' => 'required|min:100|max:255',
+            'company_id' => 'required',
+            'announcement_img' => "required|image|mimes:jpeg,png,jpg|max:3072"
         ];
     }
 }

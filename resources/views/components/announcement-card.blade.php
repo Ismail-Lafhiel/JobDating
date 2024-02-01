@@ -1,16 +1,15 @@
-<a href="https://laravel.com/docs"
-    class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+@props(['announcementId', 'announcementImg', 'announcementDescription', 'announcementTitle'])
+<a href="{{ route('announcements.show', $announcementId) }}"
+    class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-blue-500">
     <div>
         <div class="flex items-center justify-center">
-            <img class="rounded-t-lg" src="{{ asset('storage/assets/background.jpg') }}" alt="" />
+            <img class="rounded-t-lg" src="{{ $announcementImg }}" alt="" />
         </div>
 
-        <h2 class="mt-6 text-xl font-semibold text-gray-900">Documentation</h2>
+        <h2 class="mt-6 text-xl font-semibold text-gray-900">{{ $announcementTitle }}</h2>
 
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-            Laravel has wonderful documentation covering every aspect of the framework. Whether you
-            are a newcomer or have prior experience with Laravel, we recommend reading our
-            documentation from beginning to end.
+            {{ $announcementDescription }}
         </p>
     </div>
 

@@ -845,10 +845,9 @@
                     class="mb-8 text-2xl text-center font-bold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
                     Discover Announcements</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                    <x-announcement-card />
-                    <x-announcement-card />
-                    <x-announcement-card />
-                    <x-announcement-card />
+                    @foreach ($announcements as $announcement)
+                        <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img" />
+                    @endforeach
                 </div>
                 <button type="button"
                     class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 block text-center mx-auto mt-8">Discover
@@ -860,10 +859,9 @@
                     class="mb-8 text-2xl text-center font-bold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
                     Discover Companies</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                    <x-company-card />
-                    <x-company-card />
-                    <x-company-card />
-                    <x-company-card />
+                    @foreach ($companies as $company)
+                        <x-company-card :companyId="$company->id" :companyTitle="$company->name" :companyDescription="$company->description" :companyImg="$company->company_img" />
+                    @endforeach
                 </div>
                 <button type="button"
                     class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 block text-center mx-auto mt-8">Discover

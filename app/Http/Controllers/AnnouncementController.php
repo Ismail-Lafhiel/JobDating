@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AnnouncementRequest;
 use App\Models\Announcement;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
@@ -21,7 +22,8 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return view('announcements.create');
+        $companies = Company::all();
+        return view('announcements.create', compact('companies'));
     }
 
     /**
@@ -29,7 +31,20 @@ class AnnouncementController extends Controller
      */
     public function store(AnnouncementRequest $request)
     {
-        
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('image')) {
+            // Move image to the 'public/images' directory
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+
+            // Add the image information to the validated data
+            $validatedData['announcement_img'] = 'images/' . $imageName;
+        }
+
+        Announcement::create($validatedData);
+        return redirect()->route('admin.announcements')
+            ->with('success', 'New Announcement created successfully.');
     }
 
     /**
@@ -37,7 +52,7 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        // return view('announcements.show');
+        return view('announcements.show', compact('announcement'));
     }
 
     /**
@@ -45,7 +60,8 @@ class AnnouncementController extends Controller
      */
     public function edit(Announcement $announcement)
     {
-        //
+        $companies = Company::all();
+        return view('announcements.edit', compact(['companies', 'announcement']));
     }
 
     /**
@@ -53,7 +69,9 @@ class AnnouncementController extends Controller
      */
     public function update(AnnouncementRequest $request, Announcement $announcement)
     {
-        //
+        $announcement->update($request->validated());
+        return redirect()->route('admin.announcements')
+            ->with('success', 'Announcement updated successfully.');
     }
 
     /**
@@ -61,6 +79,8 @@ class AnnouncementController extends Controller
      */
     public function destroy(Announcement $announcement)
     {
-        //
+        $announcement->delete();
+        return redirect()->route('admin.announcements')
+            ->with('success', 'Announcement deleted successfully.');
     }
 }
