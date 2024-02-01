@@ -3,7 +3,7 @@
     class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-blue-500">
     <div>
         <div class="h-16 w-16 bg-blue-50 flex items-center justify-center rounded-full">
-            <img src="{{$companyImg}}" alt="">
+            <img src="{{$companyImg}}" alt="company img">
         </div>
 
         <h2 class="mt-6 text-xl font-semibold text-gray-900">{{$companyTitle}}</h2>

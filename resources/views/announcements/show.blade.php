@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ $announcement->announcement_img }}" alt="company img">
+                <img src="{{ $announcement->announcement_img }}" alt="announcement img">
             </div>
         </div>
     </section>
