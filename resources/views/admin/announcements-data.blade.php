@@ -135,8 +135,12 @@
                                                 </li>
                                             </ul>
                                             <div class="py-1">
-                                                <a href="#"
-                                                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                <form action="{{ route('announcements.destroy', $announcement->id) }}" method="post" onclick="return confirm('Are you sure you want to delete this announcement?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="block w-full text-left py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+                                                  </form>
                                             </div>
                                         </div>
                                     </td>

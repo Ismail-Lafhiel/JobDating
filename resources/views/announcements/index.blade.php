@@ -5,10 +5,9 @@
             class="mb-8 text-2xl text-center font-bold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white my-24">
             Discover Announcements</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            <x-announcement-card />
-            <x-announcement-card />
-            <x-announcement-card />
-            <x-announcement-card />
+            @foreach ($announcements as $announcement)
+                <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img" />
+            @endforeach
         </div>
     </div>
 </x-guest-layout>

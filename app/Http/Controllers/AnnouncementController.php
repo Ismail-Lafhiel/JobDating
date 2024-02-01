@@ -14,7 +14,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        return view('announcements.index');
+        $announcements = Announcement::latest()->paginate(10);
+        return view('announcements.index', compact('announcements'));
     }
 
     /**
