@@ -26,7 +26,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     // Admin routes
-    Route::get('/admin/dashboard', [AdminController::class, 'announcements_data'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/admin/announcements', [AdminController::class, 'announcements_data'])->name('admin.announcements');
     Route::get('/admin/companies', [AdminController::class, 'companies_data'])->name('admin.companies');
 
