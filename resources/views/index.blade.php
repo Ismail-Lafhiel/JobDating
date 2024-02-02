@@ -849,7 +849,7 @@
                         <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img" />
                     @endforeach
                 </div>
-                <button type="button"
+                <button type="button" onclick="window.location='{{ route('announcements.index') }}'"
                     class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 block text-center mx-auto mt-8">Discover
                     more</button>
             </div>
@@ -863,7 +863,7 @@
                         <x-company-card :companyId="$company->id" :companyTitle="$company->name" :companyDescription="$company->description" :companyImg="$company->company_img" />
                     @endforeach
                 </div>
-                <button type="button"
+                <button type="button" onclick="window.location='{{ route('companies.index') }}'"
                     class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 block text-center mx-auto mt-8">Discover
                     more</button>
             </div>
