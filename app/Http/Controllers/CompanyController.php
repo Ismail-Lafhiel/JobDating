@@ -30,7 +30,19 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-        Company::create($request->validated());
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('company_img')) {
+            // Move image to the 'public/images' directory
+            $imageName = time() . '.' . $request->company_img->extension();
+            
+            $request->company_img->move(public_path('images/companies'), $imageName);
+
+            // Add the image information to the validated data
+            $validatedData['company_img'] =  $imageName;
+
+        }
+        Company::create($validatedData);
         return redirect()->route('admin.companies')
             ->with('success', 'New Company created successfully.');
     }

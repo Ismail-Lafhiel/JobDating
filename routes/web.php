@@ -17,38 +17,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// home page
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-//admin routes
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    // Admin routes
     Route::get('/admin/dashboard', [AdminController::class, 'announcements_data'])->name('dashboard');
     Route::get('/admin/announcements', [AdminController::class, 'announcements_data'])->name('admin.announcements');
     Route::get('/admin/companies', [AdminController::class, 'companies_data'])->name('admin.companies');
-});
 
-//announcements routes
-
-//apply auth middleware to create, edit, delete and update
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+    // Announcement routes without index and show
     Route::resource("announcements", AnnouncementController::class, ['except' => ['index', 'show']]);
-});
-Route::resource("announcements", AnnouncementController::class, ['only' => ['index', 'show']]);
 
-// companies routes
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+    // Company routes without index and show
     Route::resource("companies", CompanyController::class, ['except' => ['index', 'show']]);
 });
+
+// Announcement routes for only index and show
+Route::resource("announcements", AnnouncementController::class, ['only' => ['index', 'show']]);
+
+// Company routes for only index and show
 Route::resource("companies", CompanyController::class, ['only' => ['index', 'show']]);

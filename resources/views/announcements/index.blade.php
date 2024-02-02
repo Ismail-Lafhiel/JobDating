@@ -9,5 +9,11 @@
                 <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img" />
             @endforeach
         </div>
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                {{ $announcements->links('pagination::tailwind') }}
+            </div>
+        </div>
     </div>
+    
 </x-guest-layout>

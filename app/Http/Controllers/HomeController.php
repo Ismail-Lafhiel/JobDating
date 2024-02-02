@@ -10,8 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $companies = Company::take(4)->get();
-        $announcements = Announcement::take(4)->get();
+        $companies = Company::latest()->take(4)->get();
+        $announcements = Announcement::latest()->take(4)->get();
         return view('index', compact('companies', 'announcements'));
     }
 }

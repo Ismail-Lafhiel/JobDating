@@ -9,5 +9,10 @@
                 <x-company-card :companyId="$company->id" :companyTitle="$company->name" :companyDescription="$company->description" :companyImg="$company->company_img" />
             @endforeach
         </div>
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                {{ $companies->links('pagination::tailwind') }}
+            </div>
+        </div>
     </div>
 </x-guest-layout>

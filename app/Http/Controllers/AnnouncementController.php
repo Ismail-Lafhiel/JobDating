@@ -34,14 +34,17 @@ class AnnouncementController extends Controller
     {
         $validatedData = $request->validated();
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('announcement_img')) {
             // Move image to the 'public/images' directory
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $imageName = time() . '.' . $request->announcement_img->extension();
+            
+            $request->announcement_img->move(public_path('images/announcements'), $imageName);
 
             // Add the image information to the validated data
-            $validatedData['announcement_img'] = 'images/' . $imageName;
+            $validatedData['announcement_img'] =  $imageName;
+
         }
+        
 
         Announcement::create($validatedData);
         return redirect()->route('admin.announcements')

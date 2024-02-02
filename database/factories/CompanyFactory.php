@@ -16,12 +16,13 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
+       
         return [
-            "name" =>$this->faker->company(),
-            "description" =>$this->faker->text(100),
-            "industry_field"=>$this->faker->word(),
-            "contact_info"=>$this->faker->phoneNumber(),
-            "company_img"=>$this->faker->image(null, 600, 600, null, true, 1024)
+            "name" => $this->faker->company(),
+            "description" => $this->faker->text(100),
+            "industry_field" => $this->faker->word(),
+            "contact_info" => $this->faker->phoneNumber(),
+            'company_img' => $this->faker->imageUrl(100, 100, 'https://picsum.photos/'),
         ];
     }
 }

@@ -19,8 +19,8 @@ class AnnouncementFactory extends Factory
         return [
             "title"=>$this->faker->word(),
             "description"=>$this->faker->text(100),
-            "announcement_img"=>$this->faker->image(null, 600, 600, null, true, 1024),
-            "company_id"=>$this->faker->numberBetween(1, 10)
+            "announcement_img"=>$this->faker->imageUrl(300, 200, 'https://picsum.photos/'),
+            "company_id"=>$this->faker->numberBetween(1, 30)
         ];
     }
 }
