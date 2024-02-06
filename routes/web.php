@@ -26,9 +26,10 @@ Route::middleware([
     'verified',
 ])->group(function () {
     // Admin routes
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/admin/announcements', [AdminController::class, 'announcements_data'])->name('admin.announcements');
-    Route::get('/admin/companies', [AdminController::class, 'companies_data'])->name('admin.companies');
+    // Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    // Route::get('/admin/announcements', [AdminController::class, 'announcements_data'])->name('admin.announcements');
+    // Route::get('/admin/companies', [AdminController::class, 'companies_data'])->name('admin.companies');
+    // Route::get('/admin/users', [AdminController::class, 'users_data'])->name('admin.users');
 
     // Announcement routes without index and show
     Route::resource("announcements", AnnouncementController::class, ['except' => ['index', 'show']]);
@@ -42,3 +43,5 @@ Route::resource("announcements", AnnouncementController::class, ['only' => ['ind
 
 // Company routes for only index and show
 Route::resource("companies", CompanyController::class, ['only' => ['index', 'show']]);
+
+ Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
