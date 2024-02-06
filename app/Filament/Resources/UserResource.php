@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Skill;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -21,6 +22,7 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $skills = Skill::pluck('skill_name', 'id')->toArray();
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
@@ -38,7 +40,10 @@ class UserResource extends Resource
                     ->maxLength(2048),
                 Forms\Components\Select::make('role')
                     ->required()
-                    ->options(User::ROLES)
+                    ->options(User::ROLES),
+                Forms\Components\MultiSelect::make('skills')
+                    ->required()
+                    ->options($skills)
             ]);
     }
 

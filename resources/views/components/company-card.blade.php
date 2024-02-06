@@ -1,4 +1,4 @@
-@props(['companyId', 'companyImg', 'companyDescription', 'companyTitle'])
+@props(['companyId', 'companyImg', 'companyDescription', 'companyTitle', 'industryFields'])
 <a href="{{ route('companies.show', $companyId) }}"
     class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-blue-500">
     <div>
@@ -11,6 +11,11 @@
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
             {{ $companyDescription }}
         </p>
+        <ul>
+            @foreach ($industryFields as $industryField)
+                <li>{{ $industryField->industry_field }}</li>
+            @endforeach
+        </ul>
     </div>
 
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

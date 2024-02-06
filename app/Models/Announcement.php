@@ -29,4 +29,9 @@ class Announcement extends Model
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
+
+    public function skills()
+    {
+        return $this->morphToMany(Skill::class, 'skillable');
+    }
 }

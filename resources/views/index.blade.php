@@ -860,7 +860,7 @@
                     Discover Companies</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     @foreach ($companies as $company)
-                        <x-company-card :companyId="$company->id" :companyTitle="$company->name" :companyDescription="$company->description" :companyImg="$company->company_img" />
+                        <x-company-card :companyId="$company->id" :companyTitle="$company->name" :companyDescription="$company->description" :companyImg="$company->company_img" :industryFields="$company->industry_fields"  />
                     @endforeach
                 </div>
                 <button type="button" onclick="window.location='{{ route('companies.index') }}'"

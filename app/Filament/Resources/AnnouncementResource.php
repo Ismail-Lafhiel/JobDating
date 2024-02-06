@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AnnouncementResource\Pages;
 use App\Filament\Resources\AnnouncementResource\RelationManagers;
 use App\Models\Announcement;
+use App\Models\Skill;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,6 +22,7 @@ class AnnouncementResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $skills = Skill::pluck('skill_name', 'id')->toArray();
         return $form
             ->schema([
                 Forms\Components\Select::make('company_id')
@@ -35,6 +37,9 @@ class AnnouncementResource extends Resource
                 Forms\Components\TextInput::make('announcement_img')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\MultiSelect::make('skills')
+                    ->required()
+                    ->options($skills)
             ]);
     }
 
