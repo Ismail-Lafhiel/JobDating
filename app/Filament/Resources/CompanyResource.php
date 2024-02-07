@@ -29,12 +29,13 @@ class CompanyResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\MultiSelect::make('industry_fields')
+                Forms\Components\Select::make('industry_fields')
                     ->relationship('industry_fields', 'industry_field')
                     ->required()
+                    ->multiple()
                     ->options($industryFields),
                 Forms\Components\TextInput::make('contact_info')
                     ->tel()
@@ -53,6 +54,9 @@ class CompanyResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('company_img')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('company')
+                    ->label("Industry Fields")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

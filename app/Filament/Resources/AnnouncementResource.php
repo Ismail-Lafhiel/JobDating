@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -31,15 +32,17 @@ class AnnouncementResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('announcement_img')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\MultiSelect::make('skills')
+                Forms\Components\Select::make('skills')
                     ->required()
                     ->options($skills)
+                    ->multiple()
+                    ->searchable(),
             ]);
     }
 
@@ -51,6 +54,9 @@ class AnnouncementResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('skills')
+                    ->label('Skills')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('announcement_img')
                     ->searchable(),
@@ -75,8 +81,8 @@ class AnnouncementResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+           
     }
-
     public static function getRelations(): array
     {
         return [

@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Facades\Log;
 
 class Announcement extends Model
 {
@@ -30,8 +32,14 @@ class Announcement extends Model
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
-    public function skills()
+    public function skills(): MorphToMany
     {
         return $this->morphToMany(Skill::class, 'skillable');
+    }
+
+    public function getSkillsAttribute()
+    {
+        $skills = $this->skills()->pluck('skill_name')->implode(', ');
+        return $skills ?: 'No skills';
     }
 }

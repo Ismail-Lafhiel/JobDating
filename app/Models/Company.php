@@ -34,11 +34,15 @@ class Company extends Model
     {
         return $this->hasMany(Announcement::class);
     }
-    
-    public function industry_fields ():BelongsToMany
+
+    public function industry_fields(): BelongsToMany
     {
         return $this->belongsToMany(IndustryField::class, 'company_industry_field', 'company_id', 'industry_field_id');
     }
 
-
+    public function getCompanyAttribute()
+    {
+        $industry_fields = $this->industry_fields()->pluck('industry_field')->implode(', ');
+        return $industry_fields ?: 'No Fields';
+    }
 }

@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -82,9 +83,10 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $appends = [
         'profile_photo_url',
+        'password'
     ];
 
-    public function skills()
+    public function skills(): MorphToMany
     {
         return $this->morphToMany(Skill::class, 'skillable');
     }

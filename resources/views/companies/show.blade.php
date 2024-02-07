@@ -9,16 +9,34 @@
                     class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
                     {{ $company->name }}</h1>
                 <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                    {{ $company->description }}</p>
-                @foreach ($company->industry_fields as $industryField)
-                    <div
-                        class="inline-flex items-center justify-center px-3 py-2 mr-1 font-light text-sm text-center text-white rounded-full bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                        {{ $industryField->industry_field }}
+                    {!! $company->description !!}</p>
+                <hr class="h-px my-8 bg-gray-300 border-0 dark:bg-gray-700">
+                <div class="flex align-middle justify-between">
+                    <div>
+                        <h3
+                            class="max-w-2xl mb-4 text-md font-medium tracking-tight leading-none md:text-lg xl:text-xl dark:text-white">
+                            Industry fields: </h3>
+                        @foreach ($company->industry_fields as $industryField)
+                            <p
+                                class="inline-flex items-center justify-center px-3 py-2 mr-1 font-light text-sm text-center text-white rounded-full bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                                {{ $industryField->industry_field }}
+                            </p>
+                        @endforeach
                     </div>
-                @endforeach
-                <div
-                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    {{ $company->contact_info }}
+                    <div>
+                        <h3
+                            class="max-w-2xl mb-4 text-md font-medium tracking-tight leading-none md:text-lg xl:text-xl dark:text-white">
+                            Conatct info: </h3>
+                        <p
+                            class="font-semibold text-gray-700 dark:text-white">
+                            {{ $company->contact_info }}
+                        </p>
+                    </div>
+                    <div class="apply-section self-center">
+                        <button type="button"
+                            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Apply
+                            Now</button>
+                    </div>
                 </div>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
