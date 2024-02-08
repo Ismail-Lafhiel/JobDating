@@ -1,4 +1,11 @@
-@props(['announcementId', 'announcementImg', 'announcementDescription', 'announcementTitle'])
+@props([
+    'announcementId',
+    'announcementImg',
+    'announcementDescription',
+    'announcementTitle',
+    'industryFields',
+    'skills',
+])
 <a href="{{ route('announcements.show', $announcementId) }}"
     class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-blue-500">
     <div>
@@ -11,16 +18,24 @@
         {{-- <p class="mt-4 text-gray-500 text-sm leading-relaxed text-ellipsis">
             {{ $announcementDescription }}
         </p> --}}
-        <div class="flex space-x-10 align-middle mt-10">
-            <ul class="flex space-x-2 self-center">
-                {{-- @foreach ($industryFields as $industryField)
-                    <li class="text-sm font-semibold text-gray-900 dark:text-white">{{ $industryField->industry_field }}
-                    </li>
-                @endforeach --}}
-            </ul>
-            <button type="button"
-                class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Apply
-                Now</button>
+        <div class="flex space-x-10 align-middle mt-10 justify-between">
+            @if ($skills->count() > 0)
+                <ul class="flex space-x-2 self-center">
+                    @foreach ($skills as $skill)
+                        <li class="text-sm font-semibold text-gray-900 dark:text-white">
+                            {{ $skill->skill_name }}
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <div>No Skills Fields Assigned.</div>
+            @endif
+
+            <div class="self-end">
+                <button type="button"
+                    class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Apply
+                    Now</button>
+            </div>
         </div>
     </div>
 

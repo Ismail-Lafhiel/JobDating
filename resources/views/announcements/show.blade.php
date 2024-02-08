@@ -34,10 +34,28 @@
                         <h3
                             class="max-w-2xl mb-4 text-md font-medium tracking-tight leading-none md:text-lg xl:text-xl dark:text-white">
                             Contact number</h3>
-                        <p
-                            class="font-semibold text-gray-700 dark:text-white underline cursor-pointer">
+                        <p class="font-semibold text-gray-700 dark:text-white underline cursor-pointer">
                             {{ $announcement->company->contact_info }}
                         </p>
+                    </div>
+                </div>
+                <hr class="h-px my-8 bg-gray-300 border-0 dark:bg-gray-700">
+                <div class="flex align-middle justify-between">
+                    <div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white">
+                            Required Skills</h3>
+                        @foreach ($announcement->skills as $skill)
+                            <p
+                                class="inline-flex items-center justify-center mt-3 px-3 py-2 mr-1 font-light text-sm text-center text-white rounded-full bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                                {{ $skill->skill_name }}
+                            </p>
+                        {{-- <p>No skills atxtached to this announcement.</p> --}}
+                        @endforeach
+                    </div>
+                    <div class=self-center>
+                        <button type="button"
+                            class="py-2.5 px-5 text-md font-bold text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Apply
+                            Now</button>
                     </div>
                 </div>
             </div>

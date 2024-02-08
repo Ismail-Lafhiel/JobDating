@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('skill_id');
             $table->morphs('skillable');
             $table->timestamps();
-        
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
         });
     }

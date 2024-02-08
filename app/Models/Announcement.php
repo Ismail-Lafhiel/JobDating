@@ -32,14 +32,8 @@ class Announcement extends Model
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
-    public function skills(): MorphToMany
+    public function skills()
     {
         return $this->morphToMany(Skill::class, 'skillable');
-    }
-
-    public function getSkillsAttribute()
-    {
-        $skills = $this->skills()->pluck('skill_name')->implode(', ');
-        return $skills ?: 'No skills';
     }
 }

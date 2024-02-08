@@ -28,6 +28,8 @@ class CompanyResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->label("Company Name")
+                    ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\RichEditor::make('description')
                     ->required()
@@ -43,6 +45,7 @@ class CompanyResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('company_img')
                     ->required()
+                    ->columnSpanFull()
                     ->maxLength(255),
             ]);
     }
@@ -52,7 +55,7 @@ class CompanyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->label('Company Name')->searchable(),
                 Tables\Columns\TextColumn::make('company_img')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('company')

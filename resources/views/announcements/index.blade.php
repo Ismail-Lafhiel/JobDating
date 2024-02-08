@@ -6,7 +6,7 @@
             Discover Announcements</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             @foreach ($announcements as $announcement)
-                <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img" />
+                <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img" :industryFields="$announcement->company->industry_fields" :skills="$announcement->skills" />
             @endforeach
         </div>
         <div class="row">

@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AnnouncementResource extends Resource
@@ -42,8 +43,9 @@ class AnnouncementResource extends Resource
                     ->required()
                     ->options($skills)
                     ->multiple()
-                    ->searchable(),
-            ]);
+                    ->searchable()
+                    ->format(fn ($value) => implode(', ', $value)),
+            ]);        
     }
 
     public static function table(Table $table): Table
@@ -55,7 +57,7 @@ class AnnouncementResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('skills')
+                \Filament\Tables\Columns\TextColumn::make('skills.skill_name')
                     ->label('Skills')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('announcement_img')
@@ -81,7 +83,6 @@ class AnnouncementResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-           
     }
     public static function getRelations(): array
     {

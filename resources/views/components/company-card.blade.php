@@ -11,12 +11,16 @@
         {{-- <p class="mt-4 text-gray-500 text-sm leading-relaxed truncate">
         {{ $companyDescription }}
         </p> --}}
+        @if ($industryFields->count() > 0)
         <ul class="flex space-x-2 self-center mt-5">
             @foreach ($industryFields as $industryField)
                 <li class="text-md font-medium text-gray-900 dark:text-white">{{ $industryField->industry_field }}
                 </li>
             @endforeach
         </ul>
+        @else
+        <div>No Industry Fields Provided.</div>
+        @endif
     </div>
 
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
