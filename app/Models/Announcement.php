@@ -36,4 +36,9 @@ class Announcement extends Model
     {
         return $this->morphToMany(Skill::class, 'skillable');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'applications')->withTimestamps();
+    }
 }

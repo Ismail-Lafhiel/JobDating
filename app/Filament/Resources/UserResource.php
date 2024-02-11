@@ -32,14 +32,22 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('profile_photo_path')
-                    ->maxLength(2048),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\Select::make('role')
                     ->required()
                     ->options(User::ROLES),
-                Forms\Components\MultiSelect::make('skills')
-                    ->required()
-                    ->options($skills)
+                Forms\Components\Select::make('skills')
+                    ->relationship('skills')
+                    ->multiple()
+                    ->options(Skill::pluck('skill_name', 'id')->toArray())
+                    ->searchable(),
+                Forms\Components\FileUpload::make('profile_photo_path')
+                    ->maxSize(2048)
+                    ->rules(['mimes:jpeg,png'])
+                    ->image(),
             ]);
     }
 
@@ -51,7 +59,7 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('profile_photo_path')
+                Tables\Columns\ImageColumn::make('profile_photo_path')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -3,18 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AnnouncementResource\Pages;
-use App\Filament\Resources\AnnouncementResource\RelationManagers;
 use App\Models\Announcement;
 use App\Models\Skill;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AnnouncementResource extends Resource
 {
@@ -40,12 +35,11 @@ class AnnouncementResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('skills')
-                    ->required()
-                    ->options($skills)
+                    ->relationship('skills')
                     ->multiple()
-                    ->searchable()
-                    ->format(fn ($value) => implode(', ', $value)),
-            ]);        
+                    ->options(Skill::pluck('skill_name', 'id')->toArray())
+                    ->searchable(),
+            ]);
     }
 
     public static function table(Table $table): Table

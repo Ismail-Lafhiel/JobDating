@@ -90,4 +90,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->morphToMany(Skill::class, 'skillable');
     }
+
+    public function announcements()
+    {
+        return $this->belongsToMany(Announcement::class, 'applications')->withTimestamps();
+    }
 }
