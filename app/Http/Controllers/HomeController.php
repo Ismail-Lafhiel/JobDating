@@ -11,7 +11,18 @@ class HomeController extends Controller
     public function index()
     {
         $companies = Company::latest()->take(4)->get();
-        $announcements = Announcement::latest()->take(4)->get();
-        return view('index', compact('companies', 'announcements'));
+        $user = auth()->user();
+        $announcementsWithMatchInfo = [];
+
+        foreach (Announcement::latest()->paginate(10) as $announcement) {
+            $matchInfo = $announcement->calculateSkillMatchPercentage($user);
+
+            $announcementsWithMatchInfo[] = [
+                'announcement' => $announcement,
+                'matchPercentage' => $matchInfo['matchPercentage'],
+                'isMatchAboveThreshold' => $matchInfo['isMatchAboveThreshold'],
+            ];
+        }
+        return view('announcements.index', compact('announcementsWithMatchInfo', "companies"));
     }
 }

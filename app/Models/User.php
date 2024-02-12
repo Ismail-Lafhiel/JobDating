@@ -47,6 +47,10 @@ class User extends Authenticatable implements FilamentUser
     {
         return  $this->can("viewAdmin", User::class);
     }
+    public function canApplyForJobs()
+    {
+        return $this->role === self::ROLE_USER;
+    }
     public function isAdmin()
     {
         return $this->role === self::ROLE_ADMIN;

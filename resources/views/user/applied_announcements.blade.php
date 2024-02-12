@@ -48,11 +48,11 @@
                                                 </li>
                                             </ul>
                                             <div class="py-1">
-                                                <form method="post"
+                                                <form method="post" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                     action="{{ route('delete.applied.announcement', $announcement->id) }}">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit">Delete</button>
+                                                    <button type="submit" class="w-full text-left">Delete</button>
                                                 </form>
                                             </div>
                                     </td>

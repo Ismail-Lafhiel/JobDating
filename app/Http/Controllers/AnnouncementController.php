@@ -14,8 +14,19 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::latest()->paginate(10);
-        return view('announcements.index', compact('announcements'));
+        $user = auth()->user();
+        $announcementsWithMatchInfo = [];
+
+        foreach (Announcement::latest()->paginate(10) as $announcement) {
+            $matchInfo = $announcement->calculateSkillMatchPercentage($user);
+
+            $announcementsWithMatchInfo[] = [
+                'announcement' => $announcement,
+                'matchPercentage' => $matchInfo['matchPercentage'],
+                'isMatchAboveThreshold' => $matchInfo['isMatchAboveThreshold'],
+            ];
+        }
+        return view('announcements.index', compact('announcementsWithMatchInfo'));
     }
 
     /**
@@ -23,6 +34,8 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        return view('announcements.show', compact('announcement'));
+        $user = auth()->user();
+        $matchInfo = $announcement->calculateSkillMatchPercentage($user);
+        return view('announcements.show', compact('matchInfo'));
     }
 }

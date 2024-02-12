@@ -41,4 +41,21 @@ class Announcement extends Model
     {
         return $this->belongsToMany(User::class, 'applications')->withTimestamps();
     }
+
+    public function calculateSkillMatchPercentage($user, $threshold = 60)
+    {
+        $userSkills = $user->skills->pluck('id')->toArray();
+        $announcementSkills = $this->skills->pluck('id')->toArray();
+
+        $commonSkillsCount = count(array_intersect($userSkills, $announcementSkills));
+        $totalSkillsCount = count($announcementSkills);
+
+        $matchPercentage = $totalSkillsCount > 0 ? ($commonSkillsCount / $totalSkillsCount) * 100 : 0;
+        $isMatchAboveThreshold = $matchPercentage >= $threshold;
+
+        return [
+            'matchPercentage' => $matchPercentage,
+            'isMatchAboveThreshold' => $isMatchAboveThreshold,
+        ];
+    }
 }

@@ -66,9 +66,9 @@
                     class="mb-8 text-2xl text-center font-bold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
                     Discover Announcements</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                    @foreach ($announcements as $announcement)
-                        <x-announcement-card :announcementId="$announcement->id" :announcementTitle="$announcement->title" :announcementDescription="$announcement->description" :announcementImg="$announcement->announcement_img"
-                            :industryFields="$announcement->company->industry_fields" :skills="$announcement->skills" />
+                    @foreach ($announcementsWithMatchInfo as $info)
+                        <x-announcement-card :announcementId="$info['announcement']->id" :announcementTitle="$info['announcement']->title" :announcementDescription="$info['announcement']->description" :announcementImg="$info['announcement']->announcement_img"
+                            :industryFields="$info['announcement']->company->industry_fields" :skills="$info['announcement']->skills" :matchPercentage="$info['matchPercentage']" :isMatchAboveThreshold="$info['isMatchAboveThreshold']" />
                     @endforeach
                 </div>
                 <button type="button" onclick="window.location='{{ route('announcements.index') }}'"

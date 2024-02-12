@@ -18,14 +18,19 @@ class ApplicationController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->announcements->contains($announcement)) {
+        // Check if the user can apply for jobs
+        if ($user->canApplyForJobs()) {
+            // Check if the user has already applied to this announcement
+            if (!$user->announcements->contains($announcement)) {
+                // Associate the announcement with the user
+                $user->announcements()->attach($announcement);
 
-            // Associate the announcement with the user
-            $user->announcements()->attach($announcement);
-
-            return redirect()->back()->with('success', 'Application submitted successfully!');
+                return redirect()->back()->with('success', 'Application submitted successfully!');
+            } else {
+                return redirect()->back()->with('error', 'You have already applied to this announcement.');
+            }
         } else {
-            return redirect()->back()->with('error', 'You have already applied to this announcement.');
+            return redirect()->back()->with('error', 'You do not have the required role to apply for announcements.');
         }
     }
     public function deleteAppliedAnnouncement(Request $request, Announcement $announcement)
