@@ -36,6 +36,6 @@ class AnnouncementController extends Controller
     {
         $user = auth()->user();
         $matchInfo = $announcement->calculateSkillMatchPercentage($user);
-        return view('announcements.show', compact('matchInfo'));
+        return view('announcements.show', compact('matchInfo', 'announcement'));
     }
 }

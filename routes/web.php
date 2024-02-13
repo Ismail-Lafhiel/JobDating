@@ -28,10 +28,11 @@ Route::resource("announcements", AnnouncementController::class, ['only' => ['ind
 // Company routes for only index and show
 Route::resource("companies", CompanyController::class, ['only' => ['index', 'show']]);
 
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/apply/{announcement}', [ApplicationController::class, 'apply'])->name('apply.announcement');
     Route::get('/applied-announcements', [ApplicationController::class, 'appliedAnnouncements'])->name('applied.announcements');
     Route::delete('/applied-announcements/{announcement}',  [ApplicationController::class, 'deleteAppliedAnnouncement'])->name('delete.applied.announcement');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });

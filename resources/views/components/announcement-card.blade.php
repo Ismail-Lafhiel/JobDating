@@ -28,7 +28,20 @@
             @else
                 <div>No Skills Fields Assigned.</div>
             @endif
-
+            {{-- Display match information --}}
+            @auth
+                <div class="mt-2">
+                    @if ($isMatchAboveThreshold)
+                        <div class="text-green-600 text-sm font-semibold">
+                            Matched
+                        </div>
+                    @else
+                        <div class="text-red-600 text-sm font-semibold">
+                            Not Enough Skills Matched
+                        </div>
+                    @endif
+                </div>
+            @endauth
             <form class="self-center" method="post" action="{{ route('apply.announcement', $announcementId) }}">
                 @csrf
                 <button type="submit"
@@ -36,19 +49,6 @@
                     Apply Now
                 </button>
             </form>
-
-            {{-- Display match information --}}
-            <div class="mt-2">
-                @if ($isMatchAboveThreshold)
-                    <div class="text-green-600 font-semibold">
-                        Matched: {{ $matchPercentage }}%
-                    </div>
-                @else
-                    <div class="text-red-600 font-semibold">
-                        Not Enough Skills Matched
-                    </div>
-                @endif
-            </div>
         </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

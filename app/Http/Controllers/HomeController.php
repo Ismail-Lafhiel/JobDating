@@ -23,6 +23,6 @@ class HomeController extends Controller
                 'isMatchAboveThreshold' => $matchInfo['isMatchAboveThreshold'],
             ];
         }
-        return view('announcements.index', compact('announcementsWithMatchInfo', "companies"));
+        return view('index', compact('announcementsWithMatchInfo', "companies"));
     }
 }

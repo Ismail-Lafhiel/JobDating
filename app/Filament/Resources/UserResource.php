@@ -22,7 +22,7 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $skills = Skill::pluck('skill_name', 'id')->toArray();
+        // $skills = Skill::pluck('skill_name', 'id')->toArray();
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')

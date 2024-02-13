@@ -44,18 +44,24 @@ class Announcement extends Model
 
     public function calculateSkillMatchPercentage($user, $threshold = 60)
     {
-        $userSkills = $user->skills->pluck('id')->toArray();
-        $announcementSkills = $this->skills->pluck('id')->toArray();
+        if ($user && $user->skills && $user->skills->count() > 0) {
+            $userSkills = $user->skills->pluck('id')->toArray();
+            $announcementSkills = $this->skills->pluck('id')->toArray();
 
-        $commonSkillsCount = count(array_intersect($userSkills, $announcementSkills));
-        $totalSkillsCount = count($announcementSkills);
+            $commonSkillsCount = count(array_intersect($userSkills, $announcementSkills));
+            $totalSkillsCount = count($announcementSkills);
 
-        $matchPercentage = $totalSkillsCount > 0 ? ($commonSkillsCount / $totalSkillsCount) * 100 : 0;
-        $isMatchAboveThreshold = $matchPercentage >= $threshold;
+            $matchPercentage = $totalSkillsCount > 0 ? ($commonSkillsCount / $totalSkillsCount) * 100 : 0;
+            $isMatchAboveThreshold = $matchPercentage >= $threshold;
 
+            return [
+                'matchPercentage' => $matchPercentage,
+                'isMatchAboveThreshold' => $isMatchAboveThreshold,
+            ];
+        }
         return [
-            'matchPercentage' => $matchPercentage,
-            'isMatchAboveThreshold' => $isMatchAboveThreshold,
+            'matchPercentage' => 0,
+            'isMatchAboveThreshold' => false,
         ];
     }
 }
