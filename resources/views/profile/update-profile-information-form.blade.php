@@ -85,8 +85,6 @@
                 @endif
             @endif
         </div>
-        {{-- @livewireScripts --}}
-        <livewire:skill-selection />
     </x-slot>
 
     <x-slot name="actions">

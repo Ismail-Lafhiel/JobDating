@@ -18,12 +18,17 @@ class SkillSelection extends Component
 
     public function saveSkills()
     {
-        
+        // dd($this->selectedSkills);
+
+        $this->validate([
+            'selectedSkills.*' => 'exists:skills,id',
+        ]);
+
         $user = auth()->user();
 
+        // dd($this->selectedSkills);
         // Sync selected skills with the user's skills relationship
         $user->skills()->sync($this->selectedSkills);
-        dd($this->selectedSkills);
         session()->flash('message', 'Skills updated successfully!');
     }
 }
