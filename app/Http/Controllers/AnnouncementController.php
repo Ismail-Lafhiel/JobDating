@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AnnouncementRequest;
 use App\Models\Announcement;
 use App\Models\Company;
+use App\Models\Skill;
 use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
@@ -28,7 +29,6 @@ class AnnouncementController extends Controller
         }
         return view('announcements.index', compact('announcementsWithMatchInfo'));
     }
-
     /**
      * Display the specified resource.
      */

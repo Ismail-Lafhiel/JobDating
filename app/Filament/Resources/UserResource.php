@@ -61,6 +61,9 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('profile_photo_path')
                     ->searchable(),
+                Tables\Columns\BooleanColumn::make('application_status')
+                    ->label('Application Status')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

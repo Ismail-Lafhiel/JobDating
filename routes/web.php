@@ -36,3 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/applied-announcements/{announcement}',  [ApplicationController::class, 'deleteAppliedAnnouncement'])->name('delete.applied.announcement');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
+
+
+Route::post('/show-common-skills', [AnnouncementController::class, 'show_common_skills'])->name('show-common-skills');

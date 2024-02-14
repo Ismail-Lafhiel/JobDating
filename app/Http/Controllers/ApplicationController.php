@@ -14,7 +14,7 @@ class ApplicationController extends Controller
 
         return view('user.applied_announcements', compact('appliedAnnouncements'));
     }
-    public function apply(Request $request, Announcement $announcement)
+    public function apply(Announcement $announcement)
     {
         $user = auth()->user();
 
@@ -24,6 +24,11 @@ class ApplicationController extends Controller
             if (!$user->announcements->contains($announcement)) {
                 // Associate the announcement with the user
                 $user->announcements()->attach($announcement);
+
+                // Update the application_status to true
+                // $user->update(['application_status' => true]);
+                $user->application_status = true;
+                $user->save();
 
                 return redirect()->back()->with('success', 'Application submitted successfully!');
             } else {
