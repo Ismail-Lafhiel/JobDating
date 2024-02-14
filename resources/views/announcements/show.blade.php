@@ -100,8 +100,8 @@
                     </form>
                 </div>
             </div>
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ asset('storage/'. $announcement->announcement_img) }}" alt="announcement img">
+            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex ml-10 h-96">
+                <img class="rounded-lg" src="{{ asset('storage/'. $announcement->announcement_img) }}" alt="announcement img">
             </div>
         </div>
     </section>
