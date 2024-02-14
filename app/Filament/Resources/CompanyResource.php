@@ -43,10 +43,12 @@ class CompanyResource extends Resource
                     ->tel()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('company_img')
+                Forms\Components\FileUpload::make('company_img')
                     ->required()
-                    ->columnSpanFull()
-                    ->maxLength(255),
+                    ->image()
+                    ->disk('public')
+                    // ->path('companies')
+                    ->columnSpanFull(),
             ]);
     }
 

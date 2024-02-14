@@ -31,9 +31,11 @@ class AnnouncementResource extends Resource
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('announcement_img')
+                Forms\Components\FileUpload::make('announcement_img')
                     ->required()
-                    ->maxLength(255),
+                    ->image()
+                    ->disk('public'),
+                    // ->path('announcements'),
                 Forms\Components\Select::make('skills')
                     ->relationship('skills')
                     ->multiple()
