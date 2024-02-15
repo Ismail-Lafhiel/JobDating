@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,25 +22,20 @@ use Illuminate\Support\Facades\Route;
 // home page
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    // Admin routes
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/admin/announcements', [AdminController::class, 'announcements_data'])->name('admin.announcements');
-    Route::get('/admin/companies', [AdminController::class, 'companies_data'])->name('admin.companies');
-
-    // Announcement routes without index and show
-    Route::resource("announcements", AnnouncementController::class, ['except' => ['index', 'show']]);
-
-    // Company routes without index and show
-    Route::resource("companies", CompanyController::class, ['except' => ['index', 'show']]);
-});
-
 // Announcement routes for only index and show
 Route::resource("announcements", AnnouncementController::class, ['only' => ['index', 'show']]);
 
 // Company routes for only index and show
 Route::resource("companies", CompanyController::class, ['only' => ['index', 'show']]);
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/apply/{announcement}', [ApplicationController::class, 'apply'])->name('apply.announcement');
+    Route::get('/applied-announcements', [ApplicationController::class, 'appliedAnnouncements'])->name('applied.announcements');
+    Route::delete('/applied-announcements/{announcement}',  [ApplicationController::class, 'deleteAppliedAnnouncement'])->name('delete.applied.announcement');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+});
+
+
+Route::post('/show-common-skills', [AnnouncementController::class, 'show_common_skills'])->name('show-common-skills');

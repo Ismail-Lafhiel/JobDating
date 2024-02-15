@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Company extends Model
@@ -34,4 +35,14 @@ class Company extends Model
         return $this->hasMany(Announcement::class);
     }
 
+    public function industry_fields(): BelongsToMany
+    {
+        return $this->belongsToMany(IndustryField::class, 'company_industry_field', 'company_id', 'industry_field_id');
+    }
+
+    public function getCompanyAttribute()
+    {
+        $industry_fields = $this->industry_fields()->pluck('industry_field')->implode(', ');
+        return $industry_fields ?: 'No Fields';
+    }
 }

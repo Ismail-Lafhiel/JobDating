@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
-            $table->string('industry_field');
             $table->string('contact_info');
             $table->string('company_img');
             $table->timestamps();
