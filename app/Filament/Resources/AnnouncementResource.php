@@ -56,7 +56,7 @@ class AnnouncementResource extends Resource
                 \Filament\Tables\Columns\TextColumn::make('skills.skill_name')
                     ->label('Skills')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('announcement_img')
+                Tables\Columns\ImageColumn::make('announcement_img')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
